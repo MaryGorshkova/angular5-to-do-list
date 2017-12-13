@@ -1,0 +1,9 @@
+<div *ngIf="isAutenticated">
+  <p>
+    user: {{currentUser}}
+  </p>
+  <button (click)="onLogout()">Logout</button>
+</div>
+<div *ngIf="!isAutenticated">
+  <button (click)="onLogin()">Login</button>
+</div>
