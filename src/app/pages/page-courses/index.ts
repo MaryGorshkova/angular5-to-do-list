@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ICourse} from '../../components/course-item/types';
 import {CoursesService} from '../../services/courses/index';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-page-courses',
@@ -11,15 +10,18 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class PageCoursesComponent implements OnInit {
   public courses: ICourse[];
 
-  constructor(private coursesService: CoursesService,
-              private modal: NgbModal) { }
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.courses = this.coursesService.getCourses();
+    this.update();
   }
 
-  onDelete(course, content) {
-    debugger;
-    this.coursesService.deleteCourse(course.id);
+  onDelete(course) {
+    this.coursesService.deleteCourse(course);
+    this.update();
+  }
+
+  update(): void {
+    this.courses = this.coursesService.getCourses();
   }
 }
