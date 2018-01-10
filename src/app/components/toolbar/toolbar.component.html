@@ -1,0 +1,6 @@
+<p>
+  <input #searchQuery
+         (keyup.enter)="onSearch(searchQuery.value)"
+         (blur)="onSearch(searchQuery.value)">
+  <button (click)="onSearch(searchQuery.value)">Find</button>
+</p>

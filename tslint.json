@@ -43,9 +43,6 @@
     ],
     "no-arg": true,
     "no-bitwise": true,
-    "no-console": {
-      "severity": "warning"
-    },
     "no-construct": true,
     "no-debugger": false,
     "no-duplicate-super": true,

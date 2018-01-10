@@ -10,6 +10,7 @@ import {CourseItemComponent} from './components/course-item';
 import {CoursesService} from './services/courses';
 import {LoginComponent} from './components/login/index';
 import {AutenticationService} from './services/autentication/autentication.service';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 declare const require: any;
 
@@ -20,7 +21,8 @@ declare const require: any;
     HeaderComponent,
     FooterComponent,
     CourseItemComponent,
-    LoginComponent
+    LoginComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

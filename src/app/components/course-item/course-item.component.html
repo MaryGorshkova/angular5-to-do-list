@@ -1,4 +1,7 @@
-<p>
-  {{course.id}}, {{course.description}}
-</p>
-<button (click)="onDelete()">Delete</button>
+<div class="course-item">
+  <p>
+    {{course.id}}, {{course.description}}, {{course.creatingDate | date: 'medium'}}
+  </p>
+  <button (click)="onDelete()">Delete</button>
+  <button (click)="onEdit()">Delete</button>
+</div>
