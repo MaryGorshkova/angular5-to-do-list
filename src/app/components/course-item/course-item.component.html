@@ -1,6 +1,6 @@
 <div class="course-item">
   <p>
-    {{course.id}}, {{course.description}}, {{course.creatingDate | date: 'medium'}}
+    {{course.id}}, <b>{{course.title}}</b>, {{course.description}}, {{course.creatingDate | date: 'medium'}}
   </p>
   <button (click)="onDelete()">Delete</button>
   <button (click)="onEdit()">Delete</button>

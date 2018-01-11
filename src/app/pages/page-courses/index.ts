@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ICourse} from '../../components/course-item/types';
+import { Course, ICourse } from '../../components/course-item/types';
 import {CoursesService} from '../../services/courses/index';
+import { FilterPipe } from './filter/filter.pipe';
 
 @Component({
   selector: 'app-page-courses',
@@ -9,8 +10,11 @@ import {CoursesService} from '../../services/courses/index';
 })
 export class PageCoursesComponent implements OnInit {
   public courses: ICourse[];
+  public filteredCourses: Course[];
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(
+    private coursesService: CoursesService,
+    private filterPipe: FilterPipe) { }
 
   ngOnInit() {
     this.update();
@@ -22,6 +26,10 @@ export class PageCoursesComponent implements OnInit {
   }
 
   update(): void {
-    this.courses = this.coursesService.getCourses();
+    this.courses = this.filteredCourses = this.coursesService.getCourses();
+  }
+
+  applySearch(searchQuery: string): void {
+    this.filteredCourses = this.filterPipe.transform(this.courses, searchQuery);
   }
 }

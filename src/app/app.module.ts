@@ -11,6 +11,7 @@ import {CoursesService} from './services/courses';
 import {LoginComponent} from './components/login/index';
 import {AutenticationService} from './services/autentication/autentication.service';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { FilterPipe } from './pages/page-courses/filter/filter.pipe';
 
 declare const require: any;
 
@@ -30,7 +31,8 @@ declare const require: any;
   ],
   providers: [
     CoursesService,
-    AutenticationService
+    AutenticationService,
+    FilterPipe
   ],
   bootstrap: [AppComponent]
 })
