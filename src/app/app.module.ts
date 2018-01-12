@@ -23,7 +23,8 @@ declare const require: any;
     FooterComponent,
     CourseItemComponent,
     LoginComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

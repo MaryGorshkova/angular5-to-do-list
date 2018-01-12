@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import { Course, ICourse } from '../../components/course-item/types';
 import {CoursesService} from '../../services/courses/index';
 import { FilterPipe } from './filter/filter.pipe';
@@ -14,20 +17,21 @@ export class PageCoursesComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private filterPipe: FilterPipe) { }
+    private filterPipe: FilterPipe) {
+  }
 
   ngOnInit() {
-    this.update();
+    this.coursesService.courses$.subscribe(courses => {
+      console.log(courses);
+      this.courses = courses;
+    });
+
+    this.coursesService.getCourses();
   }
 
-  onDelete(course) {
-    this.coursesService.deleteCourse(course);
-    this.update();
-  }
-
-  update(): void {
-    this.courses = this.filteredCourses = this.coursesService.getCourses();
-  }
+  // update(): void {
+  //   this.courses = this.filteredCourses = this.coursesService.getCourses();
+  // }
 
   applySearch(searchQuery: string): void {
     this.filteredCourses = this.filterPipe.transform(this.courses, searchQuery);

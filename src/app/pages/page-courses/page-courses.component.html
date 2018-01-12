@@ -1,5 +1,6 @@
 <app-toolbar (onSearch)="applySearch($event)"></app-toolbar>
 <p>
-  Courses: {{searchQuery}}
+  Courses:
 </p>
-<app-course-item *ngFor="let course of filteredCourses" [course]="course" (deleteCourse)="onDelete($event)"></app-course-item>
+<app-course-item *ngFor="let course of courses" [course]="course"></app-course-item>
+<pre>{{courses | json}}</pre>

@@ -14,7 +14,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   onApplySearch(search: string) {
-    console.log(search);
     this.onSearch.emit(search);
   }
 }
