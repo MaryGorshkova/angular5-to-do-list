@@ -10,6 +10,7 @@ import { CoursesService } from '../../services/courses/index';
 })
 export class CourseItemComponent implements OnInit {
   @Input() course: Course;
+  @Output('onDelete') onDeleteEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(private coursesService: CoursesService) { }
 
@@ -17,7 +18,7 @@ export class CourseItemComponent implements OnInit {
   }
 
   onDelete() {
-    this.coursesService.deleteCourse(this.course);
+    this.onDeleteEmitter.emit(this.course);
   }
 
   onEdit() {

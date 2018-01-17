@@ -2,5 +2,5 @@
 <p>
   Courses:
 </p>
-<app-course-item *ngFor="let course of courses" [course]="course"></app-course-item>
+<app-course-item *ngFor="let course of getCourses$ | async" [course]="course" (onDelete)="onDelete($event)"></app-course-item>
 <pre>{{courses | json}}</pre>
