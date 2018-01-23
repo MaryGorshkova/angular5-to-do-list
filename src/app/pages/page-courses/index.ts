@@ -2,9 +2,8 @@ import {
   Component, OnDestroy,
   OnInit
 } from '@angular/core';
-import { Course, ICourse } from '../../components/course-item/types';
+import { Course } from '../../components/course-item/types';
 import {CoursesService} from '../../services/courses/index';
-import { FilterPipe } from './filter/filter.pipe';
 import {Observable} from 'rxjs/Observable';
 
 @Component({
@@ -13,36 +12,30 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./page-courses.component.css']
 })
 export class PageCoursesComponent implements OnInit, OnDestroy {
-  public courses: ICourse[];
-  public filteredCourses: Course[];
-  public getCourses$: Observable<Course[]>;
-  public deleteCourses$: Observable<boolean>;
+  public courses$: Observable<Course[]>;
 
   constructor(
-    private coursesService: CoursesService,
-    private filterPipe: FilterPipe) {
+    private coursesService: CoursesService) {
   }
 
   ngOnInit() {
-    this.getCourses$ = this.coursesService.getCourses();
+    this.courses$ = this.coursesService.courses;
+    this.coursesService.getCourses();
   }
 
   ngOnDestroy() {
 
   }
 
-  getCourses(): void {
-    this.getCourses$ = this.coursesService.getCourses();
-  }
+  // getCourses(): void {
+  //   this.getCourses$ = this.coursesService.getCourses();
+  // }
 
   onDelete(course: Course): void {
-    this.deleteCourses$ = this.coursesService.deleteCourse(course);
-    this.deleteCourses$.subscribe(() => {
-      this.getCourses();
-    });
+    this.coursesService.deleteCourse(course);
   }
 
-  applySearch(searchQuery: string): void {
-    this.filteredCourses = this.filterPipe.transform(this.courses, searchQuery);
-  }
+  // applySearch(searchQuery: string): void {
+  //   this.filteredCourses = this.filterPipe.transform(this.courses, searchQuery);
+  // }
 }

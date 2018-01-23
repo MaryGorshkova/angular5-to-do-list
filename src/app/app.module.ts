@@ -1,6 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+
 
 import {AppComponent} from './app.component';
 import {PageCoursesComponent} from './pages/page-courses';
@@ -12,6 +15,7 @@ import {LoginComponent} from './components/login/index';
 import {AutenticationService} from './services/autentication/autentication.service';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FilterPipe } from './pages/page-courses/filter/filter.pipe';
+import {InMemoryDataService} from './services/data-service/in-memory-data-service';
 
 declare const require: any;
 
@@ -28,7 +32,11 @@ declare const require: any;
   ],
   imports: [
     BrowserModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [
     CoursesService,
