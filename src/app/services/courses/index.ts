@@ -4,13 +4,22 @@ import {map, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
+export const COURSES_URL = 'api/courses';
+
+
 @Injectable()
 export class CoursesService {
 
   private castCourses = new BehaviorSubject([]);
   public courses = this.castCourses.asObservable();
 
+  private searchTerm: string;
+
   constructor(private http: HttpClient) {
+  }
+
+  get initSearch(): string {
+    return this.searchTerm;
   }
 
   private httpOptions = {
@@ -18,14 +27,10 @@ export class CoursesService {
   };
 
   public getCourses(): void {
-    this.http.get<Course[]>('api/courses').pipe(
-      map(courses => {
-        return courses.filter(course => {
-          let twoWeeksAgo = new Date();
-          twoWeeksAgo = new Date(twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14));
-          return new Date(course.creatingDate) > twoWeeksAgo;
-        });
-      }))
+    const url = this.searchTerm ? `${COURSES_URL}/?title=${this.searchTerm}` : COURSES_URL;
+    this.http.get<Course[]>(url).pipe(
+      map(courses => this.filterByDate(courses))
+    )
       .subscribe(courses => {
         this.castCourses.next(courses);
       });
@@ -40,4 +45,18 @@ export class CoursesService {
         this.getCourses();
       });
   }
+
+  public applySearch(term: string): void {
+    this.searchTerm = term;
+    this.getCourses();
+  }
+
+  filterByDate(courses): Course[] {
+    return courses.filter(course => {
+      let twoWeeksAgo = new Date();
+      twoWeeksAgo = new Date(twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 30));
+      return new Date(course.creatingDate) > twoWeeksAgo;
+    });
+  }
+
 }

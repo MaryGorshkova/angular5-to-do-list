@@ -27,15 +27,11 @@ export class PageCoursesComponent implements OnInit, OnDestroy {
 
   }
 
-  // getCourses(): void {
-  //   this.getCourses$ = this.coursesService.getCourses();
-  // }
-
   onDelete(course: Course): void {
     this.coursesService.deleteCourse(course);
   }
 
-  // applySearch(searchQuery: string): void {
-  //   this.filteredCourses = this.filterPipe.transform(this.courses, searchQuery);
-  // }
+  applySearch(searchQuery: string): void {
+    this.coursesService.applySearch(searchQuery);
+  }
 }
